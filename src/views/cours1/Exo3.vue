@@ -27,6 +27,10 @@
 
 <script>
 import CardList from '@/components/cours1/exo2/CardList'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
 
 export default {
   name: 'Exo2',
@@ -69,10 +73,10 @@ export default {
     sortBirthDate () {
       if (this.sort === 'ASC') {
         this.sort = 'DESC'
-        this.items.sort((a, b) => a.birthDate < b.birthDate)
+        this.items.sort((a, b) => dayjs(a.birthDate, 'DD/MM/YYYY') < dayjs(b.birthDate, 'DD/MM/YYYY'))
       } else {
         this.sort = 'ASC'
-        this.items.sort((a, b) => a.birthDate > b.birthDate)
+        this.items.sort((a, b) => dayjs(a.birthDate, 'DD/MM/YYYY') > dayjs(b.birthDate, 'DD/MM/YYYY'))
       }
     },
     submitForm () {
